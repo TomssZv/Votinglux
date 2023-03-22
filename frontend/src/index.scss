@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
+
+:root {
+  --main-400-font: 'Arvo', serif;
+  --dark-gray: #2C3639;
+  --light-gray: #3F4E4F;
+  --brown: #A27B5C;
+  --dirty-white: #DCD7C9;
+}
+
+* {
+  font-family: var(--main-400-font);
+  font-size: 22px;
+  color: var(--dirty-white);
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}

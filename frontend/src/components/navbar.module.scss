@@ -1,0 +1,27 @@
+
+.navbar {
+  height: 45px;
+  background-color: var(--dark-gray);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.list {
+  display: flex;
+  list-style: none;
+  gap: 10px;
+  margin: 0;
+  height: 100%;
+
+  li {
+    height: calc(100% - 3px);
+    display: flex;
+    align-items: center;
+  }
+
+  li:hover {
+    border-bottom: 3px solid var(--dirty-white);  
+  }
+}
