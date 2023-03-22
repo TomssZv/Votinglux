@@ -1,5 +1,5 @@
 import React from 'react'
-import style from './navbar.module.css'
+import style from './navbar.module.scss'
 import { Link } from 'react-router-dom'
 
 function Navbar() {
@@ -10,7 +10,6 @@ function Navbar() {
       </div>
       <ul className={ style.list }>
         <li><Link to='login'>Login</Link></li>
-        <li><Link to='register'>Register</Link></li>
       </ul>
     </nav>
   )
