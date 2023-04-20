@@ -9,15 +9,22 @@
 }
 
 * {
-  font-family: var(--main-400-font);
-  font-size: 22px;
   color: var(--dirty-white);
 }
 
 body {
   margin: 0;
+  font-family: var(--main-400-font);
+  font-size: 22px;
 }
 
-a {
-  text-decoration: none;
+
+// -------------------- GLOBAL -------------------- 
+.content {
+  padding: 40px;
+  display: grid;
 }
+
+// -------------------- DESKTOP --------------------
+
+// -------------------- MOBILE --------------------
