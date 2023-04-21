@@ -12,7 +12,7 @@ function Navbar() {
   return (
     <nav className={style.navbar}>
       <div>
-        <Link to='/'>Home</Link>
+        <Link to={logedIn ? '/home' : '/'}>Home</Link>
       </div>
       <ul className={ style.list }>
         { !logedIn ? <li><Link to='login'>Login</Link></li> : <li>{username}</li> }
