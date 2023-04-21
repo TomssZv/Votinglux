@@ -69,7 +69,7 @@ export async function userLogin(req: Request, res: Response) {
 }
 
 export async function userRegister(req: Request, res: Response) {
-  const { name, surname, email, username, password } = req.body;
+  const { name, surname, username, email, password } = req.body;
   bcrypt.hash(password, saltRounds, (err: Error, hash: string) => {
     setNewUser(name, surname, email, username, hash);
   }); 
