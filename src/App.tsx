@@ -25,7 +25,7 @@ function App() {
           <Route path ='/register' element={<RegisterForm />} />
           <Route element={<ProtectedRoute logedIn={logedIn} redirectPath='/' />}>
             <Route path='/home' element={<Home />} />
-            <Route path='/newtable' element={<NewTable />} />
+            <Route path='/newgroup' element={<NewTable />} />
           </Route>
         </Routes>
       </div>   

@@ -1,6 +1,6 @@
 import { Express } from 'express';
-import { generateToken, userLogin, userRegister } from './routes/auth';
-import { getCategories } from './routes/tables';
+import { generateToken, userLogin, userRegister, authenticateJWT } from './routes/auth';
+import { createNewGroup, getCategories, getMedias } from './routes/tables';
 
 function routes(app: Express) {
   app.post('/login', userLogin)
@@ -12,6 +12,10 @@ function routes(app: Express) {
   // app.delete('/api/session', deleteSessionHandler)
 
   app.get('/categories', getCategories)
+
+  app.get('/medias', getMedias)
+
+  app.post('/new/group', authenticateJWT, createNewGroup)
 }
 
 export default routes;

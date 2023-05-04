@@ -5,16 +5,14 @@ import { useSelector } from 'react-redux'
 
 function Navbar() {
   const logedIn: boolean = useSelector((state: {[k: string]: any}) => state.user.logedIn)
-  const username: boolean = useSelector((state: {[k: string]: any}) => state.user.username)
-  console.log(logedIn)
-  console.log(username)
+  const username: string = useSelector((state: {[k: string]: any}) => state.user.username)
 
   return (
     <nav className={style.navbar}>
       <div className={style.navigateLinks}>
         <Link to={logedIn ? '/home' : '/'}>Home</Link>
         <div className={style.navigateLink}>
-          <Link to={'/newtable'}>create group</Link>
+          <Link to={'/newgroup'}>create group</Link>
         </div>
       </div>
       <ul className={ style.list }>

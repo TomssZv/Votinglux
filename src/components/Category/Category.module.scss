@@ -1,0 +1,12 @@
+.category {
+  color: var(--dirty-white);
+  font-size: 1.2rem;
+  background-color: var(--dark-gray);
+  padding: 4px 7px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: green;
+}
