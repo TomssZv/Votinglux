@@ -1,0 +1,59 @@
+.banner {
+  background: linear-gradient(159deg, rgba(67,26,175,1) 0%, rgba(104,75,180,1) 37%, rgba(98,75,157,1) 65%);
+  width: 100%;
+  height: 110px;
+  border-radius: 15px 15px 0px 0px;
+  padding: 20px 10px 23px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  :global {
+    .dot-choice {
+      position: relative;
+      bottom: calc(110px - 50px);
+    }
+
+    input {
+      background-color: inherit;
+      border: none;
+      height: 34px;
+      font-size: 32px;
+      color: var(--dirty-white);
+      font-weight: 600;
+
+      &:focus-visible {
+        outline: 0;
+        border: 0;
+      }
+
+      &::placeholder {
+        color: var(--dirty-white);
+      }
+    }
+  }
+}
+
+.mediaChoiceInput {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  padding: 20px;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  :global {
+
+    p {
+      font-size: .9rem;
+      padding: 5px;
+      background-color: var(--dark-gray);
+      border-radius: 50px;
+      cursor: pointer;
+    }
+  }
+}

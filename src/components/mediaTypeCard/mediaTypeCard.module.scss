@@ -1,0 +1,57 @@
+
+.mediaCard {
+  max-width: 300px;
+  max-height: 400px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.mediaDisplay {
+  max-height: 250px;
+  width: inherit;
+  margin-bottom: -6px;
+
+  :global {
+    div {
+      width: 100px;
+      height: fit-content !important;
+      border-radius: inherit;
+    }
+
+    img {
+      border-radius: 10px 10px 0 0;
+      height: 250px !important;
+      min-width: 200px;
+    }
+
+    video {
+      border-radius: 10px 10px 0 0;
+      max-width: 300px !important;
+    }
+  }
+}
+
+.cardDescription {
+  background-color: var(--dark-gray);
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  max-height: 150px;
+  border-radius: 0 0 10px 10px;
+  overflow-x: hidden;
+
+  :global {
+
+    h5 {
+      margin: 0;
+    }
+
+    p {
+      margin-top: 5px;
+      margin-bottom: 0;
+      font-size: 1rem;
+    }
+  }
+}
