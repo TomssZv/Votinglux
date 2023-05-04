@@ -3,86 +3,87 @@ import { getUser, setNewUser } from "../db/index"
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv';
+import axios from 'axios';
 
 dotenv.config()
 
 const saltRounds = 10;
 
-// export const deleteSessionHandler = (req: Request, res: Response) => {
+export const deleteSessionHandler = (req: Request, res: Response) => {
+  const deleteCookies = [
+    'refreshToken',
+    'accessToken',
+    'userData'
+  ];
 
-// }
+  for (let i = 0; i < deleteCookies.length; i++) {
+    res.clearCookie(deleteCookies[i]);
+  }
+
+  res.sendStatus(200).send('Loged out!')
+}
 
 export const authenticateJWT = (req: any, res: Response, next: NextFunction) => {
-  const refreshToken = req.cookies.refreshToken;
   const token = req.cookies.accessToken;
 
   if (token) {
     jwt.verify(token, process.env.JWT_PRIVATE_KEY!, (err: any, user: any) => {
       if (err) {
+        if (req.cookies.userData) {
+          res.clearCookie('userData');
+        }
           return res.sendStatus(403);
       } 
       req.user = user;
       next()
     });
 
-  } else if (refreshToken) {
-      jwt.verify(refreshToken, process.env.REFRESH_PRIVATE_KEY!, (err: any, user: any) => {
-          if (err) {
-              return res.sendStatus(403);
-          }
-          const accessToken: string = jwt.sign(
-            {
-              isAdmin: user.isAdmin,
-              username: user.username,
-              email: user.email
-            },
-            process.env.JWT_PRIVATE_KEY!,
-            { 
-              algorithm: 'RS256',
-              expiresIn: '15m'
-            }
-          );
-      
-          res.cookie('accessToken', accessToken, {
-            maxAge: 300000,
-            httpOnly: true, 
-          })
-          req.user = user;
-          
-
-          next()
-      });
   } else {
-      res.sendStatus(401);
+      generateToken(req, res, next);
   }
 };
 
-export async function generateToken(req: Request, res: Response, next: NextFunction) {
-  if (req.cookies.refreshToken) {
+export async function generateToken(req: any, res: Response, next: NextFunction) {
+  const refreshToken = req.cookies.refreshToken;
 
-    const accessToken: string = jwt.sign(
-      {
-        isAdmin: req.body.admin,
-        username: req.body.username,
-        email: req.body.email
-      },
-      process.env.JWT_PRIVATE_KEY!,
-      { 
-        algorithm: 'RS256',
-        expiresIn: '15m'
+  if (refreshToken) {
+
+    jwt.verify(refreshToken, process.env.REFRESH_PRIVATE_KEY!, (err: any, user: any) => {
+      if (err) {
+        if (req.cookies.userData) {
+          res.clearCookie('userData');
+        }
+          return res.sendStatus(403);
       }
-    );
+      const accessToken: string = jwt.sign(
+        {
+          isAdmin: user.isAdmin,
+          username: user.username,
+          email: user.email
+        },
+        process.env.JWT_PRIVATE_KEY!,
+        { 
+          algorithm: 'RS256',
+          expiresIn: '15m'
+        }
+      );
+  
+      res.cookie('accessToken', accessToken, {
+        maxAge: 900000,
+        httpOnly: true, 
+      })
+      
+      req.user = user;
 
-    res.cookie('accessToken', accessToken, {
-      maxAge: 300000,
-      httpOnly: true, 
-    })
-
-    
+      return next()
+    });
+  
   } else {
-    return res.status(401).send("Can't refresh. Invalid Token");
+    if (req.cookies.userData) {
+      res.clearCookie('userData');
+    }
+    return res.sendStatus(401).send("Can't refresh. Invalid Token");
   }
-  next();
 }
 
 export async function userLogin(req: Request, res: Response) {
