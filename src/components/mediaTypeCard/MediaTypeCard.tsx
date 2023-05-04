@@ -4,10 +4,16 @@ import mediaPlaceholder from '../../assets/images/mediaPlaceholder.jpg';
 import videoMediaPlaceholder from '../../assets/videos/videoMediaPlaceholder.mp4'
 import ReactPlayer from 'react-player';
 
-export default function MediaTypeCard({ type }: {type: string}) {
+interface MediaProps {
+  type: string
+  sendId: Function
+  id: number
+}
+
+export default function MediaTypeCard({ type, sendId, id }: MediaProps) {
 
   return (
-    <div className={style.mediaCard}>
+    <div className={style.mediaCard} onClick={() => sendId(id)}>
       <div className={style.mediaDisplay} >
         {type === 'image' && <img style={{height: 'inherit', width: 'inherit'}} src={mediaPlaceholder} />}
         {type === 'video' && <ReactPlayer style={{height: 'inherit', width: 'inherit'}} url={videoMediaPlaceholder}

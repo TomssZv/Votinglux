@@ -37,16 +37,18 @@ export function setNewUser(
   email: string,
   password: string,
 ) {
-  connection.query(
+  return new Promise ((resolve, reject) => {
+    connection.query(
     "INSERT INTO users (name, surname, username, email, password, admin) VALUES (?, ?, ?, ?, ?, ?);",
     [name, surname, username, email, password, 0],
     (err, result: any[]) => {
       if (err) {
-        throw err;
+        reject(err);
       } else {
-        console.log("Record inserted");
+        resolve(result);
       }
     })
+  })
 }
 
 export function getCategoriesDB() {
@@ -61,4 +63,40 @@ export function getCategoriesDB() {
       }
     })
   })
+}
+
+export function getAllMedia() {
+  return new Promise ((resolve, reject) => {
+    connection.query(
+      "SELECT * FROM media;",
+      (err: Error, results: any) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results);
+      }
+    })
+  })
+}
+
+export function createGroup(
+  name: string,
+  owner: number,
+  isPrivate: number,
+  searchable: number,
+  media: number,
+) {
+  return new Promise ((resolve, reject) => {
+    connection.query(
+    "INSERT INTO rate_group (name, owner, private, searchable, media) VALUES (?, ?, ?, ?, ?);",
+    [name, owner, isPrivate, searchable, media],
+    (err, result: any[]) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result)
+      }
+    })
+  })
+  
 }

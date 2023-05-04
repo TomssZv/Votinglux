@@ -45,15 +45,17 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin-top: 10px;
+  
+}
 
-  :global {
-
-    p {
-      font-size: .9rem;
-      padding: 5px;
-      background-color: var(--dark-gray);
-      border-radius: 50px;
-      cursor: pointer;
-    }
-  }
+.submitBtn {
+  width: 160px;
+  height: 40px;
+  border: 0;
+  border-radius: 5px;
+  margin-top: 20px;
+  color: var(--dark-gray);
+  background-color: var(--dirty-white);
+  cursor: pointer;
 }

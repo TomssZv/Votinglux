@@ -15,8 +15,6 @@ function LoginForm() {
   if (useSelector((state: {[k: string]: any}) => state.user.logedIn)) {
     return <Navigate to={'/home'} />
   }
-
-  console.log(useSelector((state: {[k: string]: any}) => state.user.logedIn))
   
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
