@@ -2,12 +2,12 @@ import React, { FormEventHandler } from 'react';
 import { useEffect, useState } from 'react';
 import DotChoice from '../../components/DotChoice/DotChoice';
 import MediaTypeCard from '../../components/mediaTypeCard/MediaTypeCard';
-import style from './NewTable.module.scss';
-import axios, { Axios, AxiosError, AxiosPromise, AxiosResponse } from 'axios';
+import style from './NewGroup.module.scss';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { Category } from '../../components/Category/Category';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-function NewTable() {
+function NewGroup() {
   const [groupName, setGroupName] = useState('');
   const [categories, setCategories] = useState([]);
   const [selectCategories, setSelectCategories]: any[] = useState([]);
@@ -136,4 +136,4 @@ function NewTable() {
   )
 }
 
-export default NewTable
+export default NewGroup

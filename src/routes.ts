@@ -6,7 +6,17 @@ import {
   authenticateJWT,
   deleteSessionHandler 
 } from './routes/auth';
-import { createNewGroup, getCategories, getMedias } from './routes/tables';
+import { 
+  createNewGroup,
+  getCategories,
+  getMedias,
+  getGroup,
+  createImageContent
+} from './routes/group';
+
+import multer from 'multer';
+
+const upload = multer({ dest: `media/images` })
 
 function routes(app: Express) {
   app.post('/login', userLogin)
@@ -22,6 +32,10 @@ function routes(app: Express) {
   app.get('/medias', getMedias)
 
   app.post('/new/group', authenticateJWT, createNewGroup)
+
+  app.get('/get/group/', authenticateJWT, getGroup)
+
+  app.post('/new/image/content', upload.single('image'), authenticateJWT, createImageContent)
 }
 
 export default routes;

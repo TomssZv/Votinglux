@@ -85,11 +85,12 @@ export function createGroup(
   isPrivate: number,
   searchable: number,
   media: number,
+  color: string
 ) {
   return new Promise ((resolve, reject) => {
     connection.query(
-    "INSERT INTO rate_group (name, owner, private, searchable, media) VALUES (?, ?, ?, ?, ?);",
-    [name, owner, isPrivate, searchable, media],
+    "INSERT INTO rate_group (name, owner, private, searchable, media, banner) VALUES (?, ?, ?, ?, ?, ?);",
+    [name, owner, isPrivate, searchable, media, color],
     (err, result: any[]) => {
       if (err) {
         reject(err);
@@ -99,4 +100,99 @@ export function createGroup(
     })
   })
   
+}
+
+export function addGroupMembers(
+  members: number[],
+  groupId: number
+) {
+  return new Promise ((resolve, reject) => {
+
+  })
+}
+
+export function addCategories(
+  categories: number[],
+  groupId: number
+) {
+  return new Promise ((resolve, reject) => {
+    for (let i = 0; i < categories.length; i++) {
+      connection.query(
+        "INSERT INTO group_categories (group_categories.group, category) VALUES (?, ?);",
+        [groupId, categories[i]],
+        (err, result: any[]) => {
+          if (err) {
+            reject(err);
+          }
+        })
+    }
+    resolve('Categories inserted')
+  })
+}
+
+export function getGroupData(
+  id: number
+  ) {
+  return new Promise ((resolve, reject) => {
+    connection.query(` 
+    select 
+	  rg.id id,
+    rg.name groupName,
+    rg.owner groupOwner,
+    rg.private isPrivate,
+    rg.media mediaType,
+    rg.banner bannerColor,
+    media.name mediaName
+    from rate_group rg
+    join group_categories gc on gc.group = rg.id
+    join media on media.id = rg.media where rg.id = (?) LIMIT 1;`,
+    [id],
+    (err, result) => {
+      if (err) {
+        reject(err)
+      }
+      resolve(result)
+    })
+  })
+}
+
+export function getGroupOwner() {
+  return new Promise ((resolve, reject) => {
+    connection.query(
+      "SELECT id FROM users;",
+      (err: Error, results: any) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results);
+      }
+    })
+  })
+}
+
+export function createContent(
+  cardTitle: any,
+  description: any,
+  path: any,
+  userId: any,
+  group: any
+) {
+  return new Promise ((resolve, reject) => {
+    connection.query(
+      "INSERT INTO content_card (title, description, media_url, owner, content_card.group) VALUES (?, ?, ?, ?, ?);",
+      [
+        cardTitle,
+        description,
+        path,
+        userId,
+        group
+      ],
+      (err, result) => {
+        if (err) {
+          reject(err)
+        }
+        resolve(result)
+      }
+    )
+  })
 }
