@@ -59,7 +59,8 @@ export async function generateToken(req: any, res: Response, next: NextFunction)
         {
           isAdmin: user.isAdmin,
           username: user.username,
-          email: user.email
+          email: user.email,
+          userId: user.id
         },
         process.env.JWT_PRIVATE_KEY!,
         { 

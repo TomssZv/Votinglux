@@ -1,0 +1,16 @@
+.banner {
+  display: flex;
+  padding: 10px;
+}
+
+.contentBtn {
+  position: relative;
+  left: calc(100vw - 373px);
+  
+  button {
+    border: none;
+    border-radius: 5px;
+    background-color: var(--dirty-white);
+    cursor: pointer;
+  }
+}

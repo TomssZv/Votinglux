@@ -9,7 +9,7 @@ function Navbar() {
 
   const logedIn: boolean = useSelector((state: {[k: string]: any}) => state.user.logedIn)
   const username: string = useSelector((state: {[k: string]: any}) => state.user.username)
-  const logout = useRef(null)
+  const logout: any = useRef(null)
 
   const handleLogout = () => {
     console.log('logout')
@@ -32,6 +32,9 @@ function Navbar() {
         <Link to={logedIn ? '/home' : '/'}>Home</Link>
         <div className={style.navigateLink}>
           <Link to={'/newgroup'}>create group</Link>
+        </div>
+        <div className={style.navigateLink}>
+          <Link to={'/explore'}>explore</Link>
         </div>
       </div>
       <ul className={ style.list } ref={logout}>
