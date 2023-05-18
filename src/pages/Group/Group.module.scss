@@ -1,11 +1,12 @@
 .banner {
   display: flex;
   padding: 10px;
+  border-radius: 10px 10px 0 0;
 }
 
 .contentBtn {
   position: relative;
-  left: calc(100vw - 373px);
+  left: calc(100vw - 395px);
   
   button {
     border: none;
@@ -13,4 +14,11 @@
     background-color: var(--dirty-white);
     cursor: pointer;
   }
+}
+
+.cardWrapper {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding: 30px 30px 0;
 }

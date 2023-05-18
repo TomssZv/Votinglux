@@ -2,7 +2,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addData } from '../../../redux/user';
+import { addData } from '../../../redux/slice/user';
 import { useSelector } from 'react-redux';
 
 function LoginForm() {

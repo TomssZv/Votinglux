@@ -3,6 +3,7 @@ import routes from "./routes";
 import cookies from "cookie-parser"
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookies());
+app.use('uploads/media/images', express.static('uploads/media/images'))
 
 
 app.get('/', (req: Request, res: Response) => {

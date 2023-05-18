@@ -196,3 +196,88 @@ export function createContent(
     )
   })
 }
+
+export function getGroupContent(
+  groupId: any
+) {
+  return new Promise ((resolve, reject) => {
+    connection.query(
+      `SELECT content_card.*, IF(avg(rate.rating) IS NULL, 0, avg(rate.rating)) as rating FROM content_card
+      left join user_rating rate on rate.card = content_card.id WHERE content_card.group = (?);`,
+      [groupId],
+      (err, results: any) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results);
+      }
+    })
+  })
+}
+
+export function setUserRating(
+  rating: any,
+  groupId: any,
+  userId: any,
+) {
+  return new Promise ((resolve, reject) => {
+    connection.query(
+      "INSERT INTO user_rating (user, rating, card) VALUES (?, ?, ?);",
+      [
+        userId,
+        rating,
+        groupId,
+      ],
+      (err, result) => {
+        if (err) {
+          reject(err)
+        }
+        resolve(result)
+      }
+    )
+  })
+}
+
+export function updateUserRating(
+  rating: any,
+  groupId: any,
+  userId: any,
+) {
+  return new Promise ((resolve, reject) => {
+    connection.query(
+      "UPDATE user_rating SET rating = (?) WHERE user = (?) and card = (?);",
+      [
+        rating,
+        userId,
+        groupId,
+      ],
+      (err, result) => {
+        if (err) {
+          reject(err)
+        }
+        resolve(result)
+      }
+    )
+  })
+}
+
+export function getRating(
+  groupId: any,
+  userId: any,
+) {
+  return new Promise ((resolve, reject) => {
+    connection.query(
+      "SELECT * FROM user_rating where user = (?) and card = (?);",
+      [
+        userId,
+        groupId,
+      ],
+      (err, result) => {
+        if (err) {
+          reject(err)
+        }
+        resolve(result)
+      }
+    )
+  })
+}

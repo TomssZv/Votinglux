@@ -2,7 +2,7 @@ import { Link, NavigateFunction, useNavigate } from 'react-router-dom'
 import { FormEvent, useState } from 'react'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { addData } from '../../../redux/user';
+import { addData } from '../../../redux/slice/user';
 import { Dispatch } from 'redux';
 
 function RegisterForm() {
