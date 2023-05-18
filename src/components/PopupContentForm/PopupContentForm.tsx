@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
+import style from './PopupContentForm.module.scss'
 
 interface ContentMedia {
   media: string,
@@ -10,6 +11,12 @@ export const PopupContentForm = ({ media, groupId }: ContentMedia) => {
   const [selectedMedia, setSelectedMedia]: any = useState(null);
   const [cardTitle, setCardTitle] = useState('');
   const [description, setDescription] = useState('');
+
+  const clearForm = () => {
+    setSelectedMedia('');
+    setCardTitle('');
+    setDescription('');
+  };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
@@ -29,12 +36,13 @@ export const PopupContentForm = ({ media, groupId }: ContentMedia) => {
       headers: {'Content-Type': 'multipart/form-data'}
     })
     if (response.status === 200) {
-
+      clearForm()
+      location.reload()
     }
   }
 
   return (
-    <div className='form-container'>
+    <div className={`${style.formContainer} form-container`}>
       <form onSubmit={handleSubmit} encType='multipart/form-data'>
         <h1 className='form-title'>Content card</h1>
         <div className='form-body'>
@@ -50,7 +58,7 @@ export const PopupContentForm = ({ media, groupId }: ContentMedia) => {
             <div className='field-title'>Insert {media}</div>
             <input onChange={(e:any) => {
               e.target.files[0].type.includes(media) && setSelectedMedia(e.target.files[0])}
-              } className='field-input' type='file'></input>
+              } className={`${style.mediaInput} field-input`} type='file'></input>
           </div>
         </div>
         <button className='submit-btn login-btn' type='submit' >Create</button>

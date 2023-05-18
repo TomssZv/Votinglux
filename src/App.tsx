@@ -1,4 +1,4 @@
-import './App.css';
+import style from './App.module.scss';
 import Home from './pages/Home/Home';
 import Navbar from './components/navbar/Navbar';
 import NewGroup from './pages/NewGroup/NewGroup';
@@ -19,9 +19,9 @@ function App() {
   const logedIn: boolean = useSelector((state: {[k: string]: any}) => state.user.logedIn)
 
   return (
-    <div className="App">
+    <div className={style.app}>
       <Navbar />
-      <div className='content'>
+      <div className={style.content}>
         <Routes>
           <Route index path ='/' element={<LandingPage />} />
           <Route path ='/login' element={<LoginForm />} />

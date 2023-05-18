@@ -11,12 +11,22 @@ import {
   getCategories,
   getMedias,
   getGroup,
-  createImageContent
+  createImageContent,
+  setRating
 } from './routes/group';
 
 import multer from 'multer';
 
-const upload = multer({ dest: `media/images` })
+const storage = multer.diskStorage({
+  destination: "uploads/media/images",
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}--${file.originalname}`);
+  },
+  });
+
+  const upload = multer({
+      storage: storage,
+    });
 
 function routes(app: Express) {
   app.post('/login', userLogin)
@@ -36,6 +46,9 @@ function routes(app: Express) {
   app.get('/get/group/', authenticateJWT, getGroup)
 
   app.post('/new/image/content', upload.single('image'), authenticateJWT, createImageContent)
+
+  app.post('/set/rating', authenticateJWT, setRating)
+
 }
 
 export default routes;
